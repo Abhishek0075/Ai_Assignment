@@ -5,7 +5,7 @@ BLACK = 2
 class Graph:
     
     def __init__(self,M):
-        self.Mat = M
+        self.Matrix = M
         self.N = M.shape[0]
         self.parent = [None for i in range(self.N)]
         self.color = [None for i in range(self.N)]
@@ -25,7 +25,7 @@ class Graph:
         
     def getAdj(self, index):
         adj=[]
-        for i,v in enumerate(self.Mat[index,:]):
+        for i,v in enumerate(self.Matrix[index,:]):
             if v!=0:
                 adj.append(i)
         return adj
