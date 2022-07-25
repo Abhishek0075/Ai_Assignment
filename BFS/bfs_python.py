@@ -1,5 +1,5 @@
 WHITE = 0
-GRAY = 1
+GREY = 1
 BLACK = 2
 
 class Graph:
@@ -7,8 +7,8 @@ class Graph:
     def __init__(self,M):
         self.Mat = M
         self.N = M.shape[0]
-        self.parent = [None for _ in range(self.N)]
-        self.color = [None for _ in range(self.N)]
+        self.parent = [None for i in range(self.N)]
+        self.color = [None for i in range(self.N)]
         
         
     def getParent(self,index):
@@ -30,7 +30,6 @@ class Graph:
                 adj.append(i)
         return adj
     
-    
 
 class BFS:
     
@@ -47,13 +46,13 @@ class BFS:
             self.G.setColor(i,WHITE)
             self.G.setParent(i,None)
             
-        self.G.setColor(self.source,GRAY)
+        self.G.setColor(self.source,GREY)
         self.Q.append(self.source)
         while self.Q :
             u = self.Q.pop(0)
             for v in self.G.getAdj(u):
                 if self.G.getColor(v) == WHITE:
-                    self.G.setColor(v,GRAY)
+                    self.G.setColor(v,GREY)
                     self.G.setParent(v,u)
                     self.Q.append(v)
             self.G.setColor(u,BLACK)
