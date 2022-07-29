@@ -41,7 +41,6 @@ class BFS:
         self.result = []
         
     def traverse(self):
-    
         for i in range(self.G.N):
             self.G.setColor(i,WHITE)
             self.G.setParent(i,None)

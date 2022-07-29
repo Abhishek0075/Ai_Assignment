@@ -29,39 +29,28 @@ class Graph:
             if v!=0:
                 adj.append(i)
         return adj
-    
-class DFS:
-    def __init__(self,G):
-        self.G = G
-        self.result = []
-    
-    
-    def visit(self,G,u):
-        for v in self.G.getAdj(u):
-            if(self.G.getColor(v)==WHITE):
-                self.G.setColor(v,GREY)
-                self.G.setParent(v,u)
-                self.visit(G,v)
-        self.G.setColor(u,BLACK)
-        self.result.append(u)
 
 
-    def traverse(self):
-        for i in range(self.G.N):
-            self.G.setColor(i,WHITE)
-            self.G.setParent(i,None)
-        for i in range(self.G.N):
-            if(self.G.getColor(i)==WHITE):
-                self.G.setColor(i,GREY)
-                self.visit(self.G,i)
-
-    def printResult(self):
-        for u in self.result:
-            print(u,end=' ')
-        print('')
+class DLS:
+    def __init__(self,G,source,maxD,goal):
+        self.G=G
+        self.source=source
+        self.maxD=maxD
+        self.goal=goal
+    def traverse(self,u,path,level):
+        path.append(self.source)
+        if(self.source==self.goal):
+            return (path)
+        elif(level==self.maxD):
+            return False
+        for v in self.G.getAdj(self.source):
+            if(self.traverse(v,path,level+1)==True):
+                return (path)
+            else:
+                path.remove(v)
+        return False
 
 import numpy as np
-
 M = np.array([[0,1,1,0,0],
               [1,0,0,1,0],
               [1,0,0,1,1],
@@ -69,6 +58,7 @@ M = np.array([[0,1,1,0,0],
               [0,0,1,1,0]])
 print(M)
 G = Graph(M)
-dfs = DFS(G)
-dfs.traverse()
-dfs.printResult()
+dls = DLS(G,1,3,3)
+path=[]
+dls.traverse(path,0)
+dls.printResult()
